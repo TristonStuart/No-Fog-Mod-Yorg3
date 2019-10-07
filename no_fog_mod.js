@@ -1,7 +1,7 @@
 /*
 	Name : No Fog Mod
 	Author : TDStuart
-	Description : Removes fog but keeps signal repeaters funtion.
+	Description : Removes fog but keeps signal repeater's function.
 	Website : https://github.com/TristonStuart/No-Fog-Mod-Yorg3
 	Download : https://github.com/TristonStuart/No-Fog-Mod-Yorg3/blob/master/no_fog_mod.js
 	Version : 1.0.0
