@@ -40,10 +40,17 @@ function NoFogMod(api) {
             while (maxTries-- > 0) {
                 // First, find a random tile
                 const startTile = this.getRandomBorderTile();
-                const tileToBase = startTile
+		const startTileNormalized = startTile
                 .direction(basePos)
-                .normalize()
-                ._ds(2);
+                .normalize();
+		if (startTileNormalized._ds){
+		    const tileToBase = startTileNormalized._ds(2);
+		}else if (startTileNormalized.divideScalar){
+		    const tileToBase = startTileNormalized.divideScalar(2);
+		}else {
+		    console.error("[🤡] Tobspr Messed With divideScalar again")
+		    const tileToBase = startTileNormalized.divideScalar(2);
+		}
                 let currentTile = startTile;
                 let maxSteps = 399;
                 while (maxSteps-- > 0) {
