@@ -40,26 +40,19 @@ function NoFogMod(api) {
             while (maxTries-- > 0) {
                 // First, find a random tile
                 const startTile = this.getRandomBorderTile();
-		const startTileNormalized = startTile
+								const startTileNormalized = startTile
                 .direction(basePos)
                 .normalize();
-		if (startTileNormalized._ds){
-		    const tileToBase = startTileNormalized._ds(2);
-		}else if (startTileNormalized.divideScalar){
-		    const tileToBase = startTileNormalized.divideScalar(2);
-		}else {
-		    console.error("[🤡] Tobspr Messed With divideScalar again")
-		    const tileToBase = startTileNormalized.divideScalar(2);
-		}
+								const tileToBase = startTileNormalized.divideScalar(2);
                 let currentTile = startTile;
                 let maxSteps = 399;
                 while (maxSteps-- > 0) {
                     let newTile = currentTile.add(tileToBase);
-                    
+
                     // Changed to checkIsExploredByFaction since we can't rely on the smoke
                     if (this.root.logic.checkIsExploredByFaction(newTile.round(), this.root.playerFaction)) {
                         // We step back 5 tiles
-                        var cTileHold = currentTile.sub(tileToBase._ms(5));
+                        var cTileHold = currentTile.sub(tileToBase.multiplyScalar(5));
                         // Checks if new tile would be a valid tile, if not, don't step back 5 tiles
                         if (cTileHold.x >= 0 && cTileHold.y >= 0 && cTileHold.x < api.gameConfig.numTilesX && cTileHold.y < api.gameConfig.numTilesY){
                             return cTileHold.toWorldSpace();
@@ -75,7 +68,7 @@ function NoFogMod(api) {
             return this.findSpawnPointFallback();
         });
     }
-    
+
     // Register the BZS function
     api.registerModImplementation(BZS);
 }
